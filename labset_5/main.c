@@ -31,14 +31,14 @@ void findmidpoints(float x, float y)
     m1.x = x;
     m1.y = y + dy / 2.0;
 
-    m2.x = x + dx / 2.0;
-    m2.y = y;
+    m4.x = x + dx / 2.0;
+    m4.y = y;
 
     m3.x = x + dx ; 
     m3.y = y + dy / 2.0;
 
-    m4.x = x + dx / 2.0;
-    m4.y = y + dy;
+    m2.x = x + dx / 2.0;
+    m2.y = y + dy;
 }
 
 void drawLine(Point a , Point b){
@@ -55,25 +55,24 @@ void drawLines(int n, float x, float y)
     switch (n)
     {
     case 1: case 14:
-        drawLine(m1 , m2) ; break;
+        drawLine(m1 , m4) ; break;
     case 2: case 13:
-        drawLine(m2 , m3) ; break;
+        drawLine(m3 , m4) ; break;
     case 4: case 11:
-        drawLine(m3,m4) ; 
-        break;
+        drawLine(m2,m3) ; break;
     case 7: case 8:
-        drawLine(m4 ,m1) ; break;
+        drawLine(m1 ,m2) ; break;
     case 3: case 12:
         drawLine(m1 ,m3) ; break;
     case 6: case 9:
         drawLine(m2 ,m4) ; break;
     case 5:
-        drawLine(m1 ,m4) ;
-        drawLine(m2 ,m3) ;
+        drawLine(m1 ,m2) ;
+        drawLine(m3 ,m4) ;
         break;
     case 10:
-        drawLine(m1 ,m2) ;
-        drawLine(m4 ,m3) ;
+        drawLine(m1 ,m4) ;
+        drawLine(m2 ,m3) ;
         break ; 
     }
     glEnd();
