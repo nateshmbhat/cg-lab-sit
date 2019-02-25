@@ -12,14 +12,14 @@ class Polygon{
 
 	public : 
 	bool visible ; 
-	static bool newPolygonFlag  ; //flag which is true when user is making a new polygon. becomes false when he right clicks.
+	static bool newPolygonFlag  ; //flag which is true when user is making a new polygon. becomes false when he selects end polygon.
 	static int selectedPolygon  ;//position of the selected Polygon in vector<Polygon>
 	int xmax , xmin , ymax , ymin ; 
     int id ; 
 
 	Polygon(const vector<Point> & P , int pid ){//first time polygon creation 
 		visible = true ; 
-        id = pid ; 
+                id = pid ; 
 		xmax = -999 , xmin = 999 , ymax = -999 , ymin = 999 ; 
 		for(int i =0 ; i < P.size() ; i++) { 
 			points.push_back(P[i]) ; 
