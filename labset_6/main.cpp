@@ -19,7 +19,7 @@ class Polygon{
 
 	Polygon(const vector<Point> & P , int pid ){//first time polygon creation 
 		visible = true ; 
-                id = pid ; 
+		id = pid ; 
 		xmax = -999 , xmin = 999 , ymax = -999 , ymin = 999 ; 
 		for(int i =0 ; i < P.size() ; i++) { 
 			points.push_back(P[i]) ; 
