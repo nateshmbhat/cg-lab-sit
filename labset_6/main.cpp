@@ -6,14 +6,15 @@ typedef struct Point{
 	int x , y ; 
 } Point; 
 
+bool newPolygonFlag  = false ; //flag which is true when user is making a new polygon. becomes false when he selects end polygon.
+int selectedPolygon  = -1 ;//position of the selected Polygon in vector<Polygon>
+
 class Polygon{
 	private : 
 	vector< Point > points ; 
 
 	public : 
 	bool visible ; 
-	static bool newPolygonFlag  ; //flag which is true when user is making a new polygon. becomes false when he selects end polygon.
-	static int selectedPolygon  ;//position of the selected Polygon in vector<Polygon>
 	int xmax , xmin , ymax , ymin ; 
     int id ; 
 
@@ -40,8 +41,6 @@ class Polygon{
 	}
 };
 
-bool Polygon::newPolygonFlag = false ; 
-int Polygon::selectedPolygon = -1 ; 
 vector<Point> clickPoints ;  //points to keep track when polygon is being constructed by repeated clicking at screen
 vector<Polygon> polygons ; //list of all the polygons
 
@@ -74,14 +73,14 @@ void reshape(int w, int h ){
 void mymenu(int id) {
 	switch(id){
 		case 4 : exit(0) ; 
-		case 1 : Polygon::newPolygonFlag = true ; break; 
-        case 2 : Polygon::newPolygonFlag = false ;  //when user clicks end polygon , it constructs the polygon and puts it in the array.
+		case 1 : newPolygonFlag = true ; break; 
+        case 2 : newPolygonFlag = false ;  //when user clicks end polygon , it constructs the polygon and puts it in the array.
                 if(clickPoints.size()>0){ //check if user has done some clicks after selecting add option
                     polygons.push_back(Polygon(clickPoints, polygons.size())) ; //make a new Polygon using the clicked Points and add it to list
                     clickPoints.clear() ; 
                 }
                 break ;
-        case 3 :  polygons[Polygon::selectedPolygon].setVisible(false) ; 
+        case 3 :  polygons[selectedPolygon].setVisible(false) ; 
             break ; 
 	}	
     glutPostRedisplay() ; 
@@ -92,7 +91,7 @@ void mouseHandler(int btn , int state , int x , int y ){
 	{
 		int polygonSelected =  getClickedPolygon(x , y) ; 
         polygons[polygonSelected].setSelectedPolygon(polygonSelected) ; 
-        if(Polygon::newPolygonFlag==true) { 
+        if(newPolygonFlag==true) { 
             Point p  = {x ,y} ; //add mouse point to clicked list
             clickPoints.push_back(p) ; 
         }
